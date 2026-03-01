@@ -96,6 +96,8 @@ VITE_API_URL=http://localhost:5000/api
 VITE_SOCKET_URL=http://localhost:5000
 
 ```
+
+``` text
 🚦 Ride Flow
 Customer
 
@@ -193,5 +195,6 @@ Electrical & Electronics Engineering → Full Stack Developer
 Open to internship opportunities in full-stack and real-time systems development.
 
 🔥 This project reflects production-level system design, deployment, and real-time architecture implementation.
+```
 
 
