@@ -1,261 +1,205 @@
-# 🏍 TowBuddy — Two-Wheeler Roadside Rescue Platform
+🏍 TowBuddy — Real-Time Two-Wheeler Roadside Rescue Platform
 
-A full-stack MERN application connecting stranded two-wheeler riders with nearby rescue helpers in real time.
+A production-deployed full-stack MERN application connecting stranded two-wheeler riders with nearby rescue partners in real time.
 
----
+🔴 Live Frontend: https://tow-buddy-8nwu.vercel.app
 
-## 📁 Project Structure
+🟢 Backend API: https://tow-buddy-1.onrender.com
 
-```
+📦 Repository: https://github.com/Daisyjosh/tow_buddy
+
+🚀 Overview
+
+TowBuddy is a real-time roadside assistance platform built using the MERN stack and Socket.io.
+
+It enables:
+
+Role-based authentication (Customer / Rider)
+
+Real-time ride request broadcasting
+
+OTP-based ride start verification
+
+Dynamic fare estimation using distance
+
+Live ride status updates
+
+Rider availability toggle system
+
+Full production deployment (Vercel + Render)
+
+This project demonstrates real-time system design and production-ready full-stack architecture.
+
+🏗 Architecture Overview
+Frontend (React + Vite)
+        │
+        │ REST API (Axios)
+        ▼
+Backend (Node + Express)
+        │
+        │ Real-time Events (Socket.io)
+        ▼
+MongoDB Atlas (Cloud Database)
+
+Socket rooms are used for ride-specific updates, ensuring scalable and isolated communication.
+
+📁 Project Structure
+```text
 towbuddy/
 ├── backend/
 │   ├── src/
-│   │   ├── config/         # DB connection
-│   │   ├── controllers/    # Business logic
-│   │   ├── routes/         # Express routes
-│   │   ├── models/         # Mongoose models
-│   │   ├── middleware/      # Auth, error handling
-│   │   ├── utils/          # Helpers (fare, OTP, JWT)
-│   │   ├── socket/         # Socket.io handler
-│   │   ├── app.js          # Express app
-│   │   └── server.js       # HTTP + Socket server
-│   ├── .env.example
-│   ├── package.json
-│   └── render.yaml
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── routes/
+│   │   ├── models/
+│   │   ├── middleware/
+│   │   ├── utils/
+│   │   ├── socket/
+│   │   ├── app.js
+│   │   └── server.js
+│   └── package.json
 │
 └── frontend/
     ├── src/
-    │   ├── pages/          # Login, Register, Dashboards
-    │   ├── components/     # Reusable UI components
-    │   ├── services/       # Axios API calls
-    │   ├── context/        # Auth & Socket context
-    │   ├── hooks/          # Custom hooks
-    │   ├── utils/          # Helpers
+    │   ├── pages/
+    │   ├── components/
+    │   ├── services/
+    │   ├── context/
+    │   ├── utils/
     │   ├── App.jsx
     │   └── main.jsx
-    ├── .env.example
-    ├── vite.config.js
-    ├── tailwind.config.js
-    └── vercel.json
+    └── vite.config.js
+
 ```
-
----
-
-## ⚙️ Local Setup Instructions
-
-### Prerequisites
-- Node.js v18+
-- MongoDB Atlas account (or local MongoDB)
-- Git
-
----
-
-### 1. Clone / Extract the project
-
-```bash
-cd towbuddy
-```
-
----
-
-### 2. Backend Setup
-
-```bash
+⚙️ Local Setup
+Backend
 cd backend
 npm install
-cp .env.example .env
-```
-
-Edit `.env`:
-```
-PORT=5000
-MONGO_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/towbuddy
-JWT_SECRET=supersecretkey123
-CLIENT_URL=http://localhost:5173
-```
-
-Start the backend:
-```bash
 npm run dev
-```
 
-Backend will run at: `http://localhost:5000`
+Environment variables:
 
----
-
-### 3. Frontend Setup
-
-```bash
+PORT=5000
+MONGO_URI=your_mongodb_connection
+JWT_SECRET=your_secret
+CLIENT_URL=http://localhost:5173
+Frontend
 cd frontend
 npm install
-cp .env.example .env
-```
+npm run dev
 
-Edit `.env`:
-```
+Environment variables:
+
 VITE_API_URL=http://localhost:5000/api
 VITE_SOCKET_URL=http://localhost:5000
-```
+🚦 Ride Flow
+Customer
 
-Start the frontend:
-```bash
-npm run dev
-```
+Register / Login
 
-Frontend will run at: `http://localhost:5173`
+Select pickup & drop location
 
----
+View fare estimate
 
-## 🚀 Deployment Instructions
+Request rescue
 
-### Backend → Render
+Share OTP with rider
 
-1. Push backend folder to a GitHub repo
-2. Go to [render.com](https://render.com) → New Web Service
-3. Connect your GitHub repo
-4. Settings:
-   - **Root Directory**: `backend`
-   - **Build Command**: `npm install`
-   - **Start Command**: `npm start`
-   - **Node version**: 18
-5. Add Environment Variables:
-   | Key | Value |
-   |-----|-------|
-   | PORT | 5000 |
-   | MONGO_URI | mongodb+srv://... |
-   | JWT_SECRET | your_secret_here |
-   | CLIENT_URL | https://your-frontend.vercel.app |
-6. Deploy → Copy the service URL (e.g. `https://towbuddy.onrender.com`)
+Ride completes with real-time updates
 
----
+Rider
 
-### Frontend → Vercel
+Register as Rider
 
-1. Push frontend folder to GitHub
-2. Go to [vercel.com](https://vercel.com) → New Project → Import from GitHub
-3. Settings:
-   - **Root Directory**: `frontend`
-   - **Framework Preset**: Vite
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-4. Add Environment Variables:
-   | Key | Value |
-   |-----|-------|
-   | VITE_API_URL | https://towbuddy.onrender.com/api |
-   | VITE_SOCKET_URL | https://towbuddy.onrender.com |
-5. Deploy!
+Go online
 
----
+Accept ride request
 
-### Database → MongoDB Atlas
+Mark arrival
 
-1. Go to [cloud.mongodb.com](https://cloud.mongodb.com)
-2. Create a free M0 cluster
-3. Create a database user (username + password)
-4. Whitelist all IPs: `0.0.0.0/0`
-5. Get connection string: `mongodb+srv://user:pass@cluster.mongodb.net/towbuddy`
-6. Use this as `MONGO_URI` in both local `.env` and Render env vars
+Verify OTP
 
----
+Complete ride
 
-## 🎮 How to Use
+All state transitions are synchronized using Socket.io.
 
-### As a Customer:
-1. Register with role **Customer**
-2. Go to **Customer Dashboard**
-3. Click **Book Ride**
-4. Select service type, vehicle type, number of rescuers
-5. Click the map to set pickup location (green), then dropoff (red)
-6. See fare estimate → Click **Request Rescue**
-7. Wait for a rider to accept
-8. When rider arrives, share the **OTP** displayed on screen
-9. Ride starts after OTP verification
-
-### As a Rider:
-1. Register with role **Rider** (provide name, phone, vehicle type)
-2. Go to **Rider Dashboard**
-3. Click **Go Online** to start receiving requests
-4. Accept pending rides shown in real time
-5. Click **Mark as Arrived** when you reach the pickup
-6. Enter the customer's 4-digit OTP to start the ride
-7. Click **Complete Ride** when done
-8. Earnings are automatically tracked
-
----
-
-## 💡 Tech Stack
-
-| Layer | Tech |
-|-------|------|
-| Frontend | React 18 + Vite |
-| Styling | TailwindCSS |
-| Maps | Leaflet + OpenStreetMap |
-| HTTP Client | Axios |
-| Routing | React Router DOM v6 |
-| Notifications | React Hot Toast |
-| Real-time | Socket.io |
-| Backend | Node.js + Express |
-| Database | MongoDB + Mongoose |
-| Auth | JWT + bcryptjs |
-| Deployment (FE) | Vercel |
-| Deployment (BE) | Render |
-
----
-
-## 🔑 API Endpoints
-
-### Auth
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | /api/auth/register | Register user |
-| POST | /api/auth/login | Login |
-| GET | /api/auth/me | Get current user |
-
-### Rides
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | /api/rides | Create ride (customer) |
-| POST | /api/rides/estimate | Fare estimate |
-| GET | /api/rides/my | Customer ride history |
-| GET | /api/rides/pending | Pending rides (rider) |
-| GET | /api/rides/active | Rider's active ride |
-| GET | /api/rides/:id | Get ride by ID |
-| PATCH | /api/rides/:id/accept | Accept ride (rider) |
-| PATCH | /api/rides/:id/arrived | Mark arrived (rider) |
-| PATCH | /api/rides/:id/verify-otp | Verify OTP (rider) |
-| PATCH | /api/rides/:id/complete | Complete ride (rider) |
-| PATCH | /api/rides/:id/cancel | Cancel ride |
-
-### Rider
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /api/rider/profile | Get rider profile |
-| PUT | /api/rider/profile | Update profile |
-| PATCH | /api/rider/toggle-online | Toggle online status |
-
----
-
-## 🔄 Socket Events
-
-| Event | Direction | Description |
-|-------|-----------|-------------|
-| `new_ride` | Server → Riders | New pending ride |
-| `ride_taken` | Server → Riders | Ride accepted by someone |
-| `ride_accepted` | Server → Customer | Rider accepted the ride |
-| `rider_arrived` | Server → Customer | Rider at pickup |
-| `ride_started` | Server → Room | Ride in progress |
-| `ride_completed` | Server → Room | Ride done |
-| `ride_cancelled` | Server → Room | Ride cancelled |
-| `join_ride` | Client → Server | Join ride room |
-| `leave_ride` | Client → Server | Leave ride room |
-
----
-
-## 💰 Fare Calculation
-
-```
-distance = haversine(pickup, dropoff) in km
+🔄 Real-Time Events
+Event	Description
+new_ride	Broadcast new ride to online riders
+ride_accepted	Notify customer of acceptance
+rider_arrived	Notify customer arrival
+ride_started	Ride officially begins
+ride_completed	Ride finished
+ride_cancelled	Ride cancelled
+💰 Fare Calculation Logic
+distance = haversine(pickup, dropoff)
 base_fare = distance × ₹20
-helper_charge = numberOfRiders === 2 ? ₹100 : 0
-total = base_fare + helper_charge
-```
+helper_charge = ₹100 if 2 rescuers required
+total_fare = base_fare + helper_charge
+
+Distance calculated using Haversine formula.
+
+🧠 Technical Highlights
+
+JWT authentication middleware
+
+Role-based protected routes
+
+Production CORS configuration
+
+Axios interceptors with token injection
+
+Socket room isolation per ride
+
+Optimistic UI updates
+
+MongoDB schema modeling
+
+Cloud deployment (Render + Vercel)
+
+Environment-based configuration
+
+🌍 Deployment
+Layer	Platform
+Frontend	Vercel
+Backend	Render
+Database	MongoDB Atlas
+
+Production CORS configured for secure cross-origin requests.
+
+📌 Future Improvements
+
+Live GPS tracking
+
+Razorpay / Stripe integration
+
+Rating system
+
+Admin dashboard
+
+Push notifications
+
+Mobile app version
+
+👩‍💻 Author
+
+Daisy Panimaryial
+Electrical & Electronics Engineering → Full Stack Developer
+
+Open to internship opportunities in full-stack and real-time systems development.
+
+🔥 This project reflects production-level system design, deployment, and real-time architecture implementation.
+
+Now tell me:
+
+Do you want to:
+
+✍️ Write a powerful LinkedIn launch post
+
+🎥 Prepare demo video script
+
+💼 Draft internship message to Rapido
+
+🧠 Add system design explanation section
+
+Let’s convert this into opportunity. 🚀
