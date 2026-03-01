@@ -1,7 +1,7 @@
 🏍 TowBuddy — Real-Time Two-Wheeler Roadside Rescue Platform
 
 <p align="left">
-  <img src="https://skillicons.dev/icons?i=react,vite,nodejs,express,mongodb,socketio,vercel" />
+  <img src="https://skillicons.dev/icons?i=react,vite,nodejs,express,mongodb,vercel" />
 </p>
 
 A production-deployed full-stack MERN application connecting stranded two-wheeler riders with nearby rescue partners in real time.
