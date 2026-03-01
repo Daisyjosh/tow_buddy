@@ -71,6 +71,8 @@ towbuddy/
     └── vite.config.js
 
 ```
+
+``` text
 ⚙️ Local Setup
 Backend
 cd backend
@@ -92,6 +94,8 @@ Environment variables:
 
 VITE_API_URL=http://localhost:5000/api
 VITE_SOCKET_URL=http://localhost:5000
+
+```
 🚦 Ride Flow
 Customer
 
