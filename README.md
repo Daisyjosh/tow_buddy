@@ -1,5 +1,6 @@
 🏍 TowBuddy — Real-Time Two-Wheeler Roadside Rescue Platform
 
+## 🛠 Tech Stack
 <p align="left">
   <img src="https://skillicons.dev/icons?i=react,vite,nodejs,express,mongodb,vercel" />
 </p>
