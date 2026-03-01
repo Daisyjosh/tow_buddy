@@ -194,16 +194,4 @@ Open to internship opportunities in full-stack and real-time systems development
 
 🔥 This project reflects production-level system design, deployment, and real-time architecture implementation.
 
-Now tell me:
 
-Do you want to:
-
-✍️ Write a powerful LinkedIn launch post
-
-🎥 Prepare demo video script
-
-💼 Draft internship message to Rapido
-
-🧠 Add system design explanation section
-
-Let’s convert this into opportunity. 🚀
