@@ -33,7 +33,7 @@ Rider availability toggle system
 Full production deployment (Vercel + Render)
 
 This project demonstrates real-time system design and production-ready full-stack architecture.
-
+``` text
 🏗 Architecture Overview
 Frontend (React + Vite)
         │
@@ -46,6 +46,7 @@ Backend (Node + Express)
 MongoDB Atlas (Cloud Database)
 
 Socket rooms are used for ride-specific updates, ensuring scalable and isolated communication.
+```
 
 📁 Project Structure
 ```text
